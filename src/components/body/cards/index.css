@@ -1,0 +1,20 @@
+.swiper-button-next {
+  position: absolute;
+  right: -3rem;
+  background-color: lightgray;
+  padding: 1.5rem 1rem;
+}
+
+.swiper-button-prev {
+  position: absolute;
+  left: -3rem;
+  background-color: lightgray;
+  padding: 1.5rem 1rem;
+}
+
+:root {
+  --swiper-theme-color: white;
+}
+:root {
+  --swiper-navigation-size: 30px;
+}
