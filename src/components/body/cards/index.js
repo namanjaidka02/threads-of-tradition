@@ -1,97 +1,62 @@
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import "./index.css";
 
 const Cards = (props) => {
+  const { dressData } = props;
+  const { img, price, button, id, quantity } = dressData?.data;
+
+  const handleClick = () => {
+    const cartItem = {
+      img,
+      price,
+      button,
+      id,
+    };
+    // Add item to the localStorage
+    let cartItems = JSON.parse(localStorage.getItem("cartItems"));
+    if (!cartItems) {
+      // If there is no items in local storage then create an empty array and push our new object into it
+      //       console.log('no data');
+      //      return false;
+      cartItems = [];
+      //    else{
+      //        console.log('yes')
+      cartItems.push(cartItem);
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      //     }
+    } else {
+      // Find out if this product already exists in the localstorage
+      let exist = cartItems.find((x) => x.id === id);
+      console.log({ exist });
+      if (!exist) {
+        console.log("not found", exist);
+        cartItems.push(cartItem);
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      } else {
+        alert("Product already added!");
+      }
+    }
+  };
+
   return (
-    <div className=" mx-[20rem] xxs:py-10 relative font-raleway">
-      <Swiper
-        slidesPerView={4}
-        spaceBetween={70}
-        pagination={false}
-        // autoplay={{
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        // }}
-        navigation={{
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        }}
-        modules={[Pagination, Navigation, Autoplay]}
-        className="flex justify-evenly items-center w-[100%]"
-        style={{
-          "--swiper-navigation-color": "#000",
-          "--swiper-navigation-size": "25px",
-        }}
-        breakpoints={{
-          768: {
-            slidesPerView: 4,
-            spaceBetween: 20,
-          },
-        }}
-      >
-        <SwiperSlide>
-          <img src={props.img4} alt="suit1" className=" mix-blend-multiply " />
-          <div className=" pt-4 flex justify-between items-center">
-            <p>₹ 10000</p>
-            <button className="bg-red-400 p-2 rounded-md hover:bg-red-500 text-white">
-              Add to cart
-            </button>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={props.img2} alt="suit1" className=" mix-blend-multiply" />
-          <div className=" pt-4 flex justify-between items-center">
-            <p>₹ 10000</p>
-            <button className="bg-red-400 p-2 rounded-md hover:bg-red-500 text-white">
-              Add to cart
-            </button>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={props.img3} alt="suit1" className=" mix-blend-multiply " />
-          <div className=" pt-4 flex justify-between items-center">
-            <p>₹ 10000</p>
-            <button className="bg-red-400 p-2 rounded-md hover:bg-red-500 text-white">
-              Add to cart
-            </button>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={props.img5} alt="suit1" className=" mix-blend-multiply " />
-          <div className=" pt-4 flex justify-between items-center">
-            <p>₹ 10000</p>
-            <button className="bg-red-400 p-2 rounded-md hover:bg-red-500 text-white">
-              Add to cart
-            </button>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={props.img2} alt="suit1" className=" mix-blend-multiply " />
-          <div className=" pt-4 flex justify-between items-center">
-            <p>₹ 10000</p>
-            <button className="bg-red-400 p-2 rounded-md hover:bg-red-500 text-white">
-              Add to cart
-            </button>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={props.img4} alt="suit1" className=" mix-blend-multiply" />
-          <div className=" pt-4 flex justify-between items-center">
-            <p>₹ 10000</p>
-            <button className="bg-red-400 p-2 rounded-md hover:bg-red-500 text-white">
-              Add to cart
-            </button>
-          </div>
-        </SwiperSlide>
-      </Swiper>
-      <div className="swiper-button-next hover:bg-slate-500"></div>
-      <div className="swiper-button-prev hover:bg-slate-500"></div>
+    <div className="inline-block mx-2 py-10  font-raleway">
+      <div className="w-[300px]">
+        <img
+          src={img}
+          alt="suit1"
+          className=" w-[300px]  mix-blend-multiply "
+        />
+      </div>
+
+      <div className=" pt-4 px-3 flex justify-between items-center">
+        <p className="text-md">{price}</p>
+        <button
+          onClick={handleClick}
+          className="bg-red-400 p-[6px] rounded-md hover:bg-red-500 text-white"
+        >
+          {button}
+        </button>
+      </div>
     </div>
   );
 };

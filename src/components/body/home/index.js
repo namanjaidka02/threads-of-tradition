@@ -1,13 +1,13 @@
 import React from "react";
 import Cards from "../cards/index";
 import Navbar from "../../navbar/index";
-import img1 from "../../../images/img1.jpeg";
-import img2 from "../../../images/img2.jpeg";
-import img3 from "../../../images/img3.jpeg";
-import img4 from "../../../images/img4.jpeg";
-import img5 from "../../../images/img5.jpeg";
+import dressList from "../../mockData";
+import { useState } from "react";
+import Footer from "../footer";
+import "./index.css";
 
 const Home = (props) => {
+  const [listOfDress, setListOfDress] = useState(dressList);
   return (
     <div className="bg-pink-gradient h-[100%]">
       <Navbar name="threads of tradition" />
@@ -27,9 +27,24 @@ const Home = (props) => {
           </div>
         </div>
       </div>
+      <div className="  mt-[5rem] pl-[15rem]">
+        <p className="font-caveat text-3xl">New Arrivals</p>
+      </div>
+
+      <div className=" flex overflow- scroll-container   mx-[25rem]">
+        {listOfDress.map((dress) => {
+          return <Cards key={dress.data.id} dressData={dress} />;
+        })}
+      </div>
+      <div className="flex justify-center items-center my-[5rem] ">
+        <div>______________________</div>
+        <div>
+          <p className="mt-3 mx-2 font-caveat text-3xl">shop now</p>
+        </div>
+        <div>______________________</div>
+      </div>
       <div>
-        {" "}
-        <Cards img1={img1} img2={img2} img3={img3} img4={img4} img5={img5} />
+        <Footer />
       </div>
     </div>
   );
