@@ -16,6 +16,7 @@ const Home = (props) => {
           src={props.bgimg}
           alt="bg img"
           className="xxs:pt-7 mix-blend-multiply w-[60%]"
+          loading="eager"
         />
         <div className="flex xxs:flex-col md:flex-row items-center bg-white xl:w-[40%] font-raleway xxs:mt-7 xxs:py-5 xxs:px-7 justify-around text-center">
           <h2>FREE SHIPPING</h2>

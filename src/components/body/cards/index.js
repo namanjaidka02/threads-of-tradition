@@ -45,6 +45,7 @@ const Cards = (props) => {
           src={img}
           alt="suit1"
           className=" w-[300px]  mix-blend-multiply "
+          loading="lazy"
         />
       </div>
 
